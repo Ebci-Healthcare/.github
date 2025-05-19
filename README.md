@@ -58,57 +58,67 @@ This repository contains two main components:
 
 
 2. **Run the container**
-
+```bash
 docker run -d \
   --name hospital-pg \
   -p 5432:5432 \
   hospital-postgres:15
-
+```
 3. **Access via psql**
-   
+ ```bash  
 psql -U app -d hospital
 # then list tables:
 \dt
-
+```
 ### Rebuild the DB Container
 
 1. **Stop & remove old container**
-   
+ ```bash    
 docker rm -f hospital-pg
-
-2. **Run updated image**  
+```
+2. **Run updated image**
+ ```bash  
 docker run -d \
   --name hospital-pg \
   -p 5432:5432 \
   hospital-postgres:15
-
+```
 ### Run the Backend
 
 1. **Build**
+ ```bash 
 docker build -t hospital-backend:latest .
+```
 2. **Run**
+ ```bash 
 docker run -d \
   --name hospital-backend \
   -p 8091:8091 \
   --env-file ./env.list \
   hospital-backend:latest
-
+```
 ### Run the Frontend
 
 1. **Build**
+ ```bash 
 docker build -t hospital-frontend .
+```
 2. **Run**
+
+ ```bash 
 docker run -d \
   --name frontend \
   -p 3000:3000 \
   hospital-frontend
-
+```
 ### Generating the API Client
-
+ ```bash 
 pnpm dlx @openapitools/openapi-generator-cli generate \
   -i http://localhost:8091/v3/api-docs \
   -g typescript-axios \
   -o ./src/api
+```
+
 ### EBCI Developer Guidelines
 
 All contributors must follow these “commandments”:
