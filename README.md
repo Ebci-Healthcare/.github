@@ -14,13 +14,10 @@
    - [Rebuild the DB Container](#rebuild-the-db-container)  
    - [Run the Backend](#run-the-backend)  
    - [Run the Frontend](#run-the-frontend)  
-4. [Directory Structure](#directory-structure)  
-5. [Configuration](#configuration)  
-6. [Generating the API Client](#generating-the-api-client)  
-7. [EBCI Developer Guidelines](#ebci-developer-guidelines)  
-8. [Swagger Documentation](#swagger-documentation)  
-9. [Todos](#todos)  
-10. [License](#license)
+4. [Generating the API Client](#generating-the-api-client)  
+5. [EBCI Developer Guidelines](#ebci-developer-guidelines)  
+6. [Swagger Documentation](#swagger-documentation)  
+
 
 ---
 
@@ -142,8 +139,8 @@ All lists must support server-side pagination.
 Mobile-first design using Tailwind.
    
 7. **Internationalization (i18n)**
-
 No hard-coded text—use translation files everywhere.
+
 8. **Typography Component**
 Consistent text styles via a shared component.
 
@@ -153,3 +150,16 @@ Fetch and cache all API calls with React Query.
 10. **Default Credentials**
 Username: admin  
 Password: admin
+
+
+
+### EBCI Developer Guidelines
+
+All endpoints are available under:
+
+ ```bash 
+http://localhost:8091/swagger-ui/index.html
+ ```
+
+
+
