@@ -55,3 +55,91 @@ This repository contains two main components:
 1. **Build the image**  
    ```bash
    docker build -t hospital-postgres:15 .
+
+
+2. **Run the container**
+
+docker run -d \
+  --name hospital-pg \
+  -p 5432:5432 \
+  hospital-postgres:15
+
+3. **Access via psql**
+   
+psql -U app -d hospital
+# then list tables:
+\dt
+
+### Rebuild the DB Container
+
+1. **Stop & remove old container**
+   
+docker rm -f hospital-pg
+
+2. **Run updated image**  
+docker run -d \
+  --name hospital-pg \
+  -p 5432:5432 \
+  hospital-postgres:15
+
+### Run the Backend
+
+1. **Build**
+docker build -t hospital-backend:latest .
+2. **Run**
+docker run -d \
+  --name hospital-backend \
+  -p 8091:8091 \
+  --env-file ./env.list \
+  hospital-backend:latest
+
+### Run the Frontend
+
+1. **Build**
+docker build -t hospital-frontend .
+2. **Run**
+docker run -d \
+  --name frontend \
+  -p 3000:3000 \
+  hospital-frontend
+
+### Generating the API Client
+
+pnpm dlx @openapitools/openapi-generator-cli generate \
+  -i http://localhost:8091/v3/api-docs \
+  -g typescript-axios \
+  -o ./src/api
+### EBCI Developer Guidelines
+
+All contributors must follow these “commandments”:
+
+1. **Branch Naming**
+Name branches after Linear ticket IDs (e.g. EB-123).
+
+2. **Exception Handling**
+Cover all edge cases; surface meaningful HTTP errors.
+
+3. **Swagger Docs**
+Document every endpoint, including request/response schemas.
+
+4. **Roles & Permissions**
+Annotate backend controllers with @PreAuthorize.
+
+5. **Frontend Pagination**
+All lists must support server-side pagination.
+   
+6. **Responsive UI**
+Mobile-first design using Tailwind.
+   
+7. **Internationalization (i18n)**
+
+No hard-coded text—use translation files everywhere.
+8. **Typography Component**
+Consistent text styles via a shared component.
+
+9. **React Query**
+Fetch and cache all API calls with React Query.
+
+10. **Default Credentials**
+Username: admin  
+Password: admin
